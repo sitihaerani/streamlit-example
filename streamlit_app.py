@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup 
 import numpy as np
 from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
