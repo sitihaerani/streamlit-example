@@ -1,15 +1,12 @@
 import streamlit as st
 from PIL import Image
-import requests
-from bs4 import BeautifulSoup 
-import numpy as np
 from keras.preprocessing.image import load_img, img_to_array
+import numpy as np
 from keras.models import load_model
-
-
+import requests
+from bs4 import BeautifulSoup
 
 model = load_model('FV.h5')
-
 labels = {0: 'apple', 1: 'banana', 2: 'beetroot', 3: 'bell pepper', 4: 'cabbage', 5: 'capsicum', 6: 'carrot',
           7: 'cauliflower', 8: 'chilli pepper', 9: 'corn', 10: 'cucumber', 11: 'eggplant', 12: 'garlic', 13: 'ginger',
           14: 'grapes', 15: 'jalepeno', 16: 'kiwi', 17: 'lemon', 18: 'lettuce',
@@ -36,7 +33,7 @@ def fetch_calories(prediction):
         print(e)
 
 
-def prepare_image(img_path):
+def processed_img(img_path):
     img = load_img(img_path, target_size=(224, 224, 3))
     img = img_to_array(img)
     img = img / 255
@@ -63,7 +60,8 @@ def run():
 
         # if st.button("Predict"):
         if img_file is not None:
-            result = prepare_image(save_image_path)
+            result = processed_img(save_image_path)
+            print(result)
             if result in vegetables:
                 st.info('**Category : Vegetables**')
             else:
